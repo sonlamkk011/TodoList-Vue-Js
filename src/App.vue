@@ -1,28 +1,65 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div >
+      <h1 class="title">TODO LIST</h1>
+      <input class="input" type="text" v-model="newTask" />
+      <button :class="{ add: addtask }" @click="addtask()">Thêm todo</button>
+      <div v-for="(task, index) in tasks" :key="index">
+        <input type="checkbox" v-model="task.done" />
+        <span :class="{ done: task.done }">{{ task.content }}</span>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  name: "App",
+  data() {
+    return {
+      newTask: "",
+      tasks: [],
+    };
+  },
+  methods: {
+    addtask: function () {
+      this.tasks.push({
+        content: this.newTask,
+        done: false,
+      });
+    },
+  },
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.title{
+  color: blueviolet;
+}
+
+.input {
+  border-radius: 10px;
+  border-color: aquamarine;
+
+}
+
+.done {
+  text-decoration: line-through;
+  color: darkgray;
+}
+.add {
+  background-color: yellowgreen;
+  border-color: aquamarine;
+  border-radius: 30px;
+  margin-left: 10px;
+}
+.container {
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
+
+
+
+
+
